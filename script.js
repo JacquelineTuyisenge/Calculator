@@ -378,7 +378,6 @@ function buttonDelClicked()
             document.getElementById("screenTextBottom").textContent = number2;
     }
 
-        batteryCheck()
         console.log("Delete button pressed")
     
 }
@@ -435,22 +434,22 @@ function buttonPercentClicked() {
     console.log("Result: " + result);
   }
 
-  function add(number1, number2)
+  function Add(number1, number2)
   {
     return parseFloat(number1) + parseFloat(number2);
   }
 
-  function subtract(number1, number2)
+  function Sub(number1, number2)
   {
     return parseFloat(number1) - parseFloat(number2);
   }
 
-  function multiply(number1, number2)
+  function Mul(number1, number2)
   {
     return parseFloat(number1) * parseFloat(number2);
   }
 
-  function divide(number1, number2)
+  function Div(number1, number2)
   {
     return parseFloat(number1) / parseFloat(number2);
   } 
