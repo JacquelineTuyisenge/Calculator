@@ -434,22 +434,22 @@ function buttonPercentClicked() {
     console.log("Result: " + result);
   }
 
-  function Add(number1, number2)
+  function add(number1, number2)
   {
     return parseFloat(number1) + parseFloat(number2);
   }
 
-  function Sub(number1, number2)
+  function subtract(number1, number2)
   {
-    return parseFloat(number1) - parseFloat(number2);
+    return number1 - number2;
   }
 
-  function Mul(number1, number2)
+  function multiply(number1, number2)
   {
-    return parseFloat(number1) * parseFloat(number2);
+    return number1 * number2;
   }
 
-  function Div(number1, number2)
+  function divide(number1, number2)
   {
-    return parseFloat(number1) / parseFloat(number2);
+    return number1 / number2;
   } 
