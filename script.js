@@ -46,75 +46,65 @@ buttonFact.addEventListener("click", buttonFactClicked);
 
 //variables
 let operatorClicked = false;
-let defaultBottomNumber = 0;
 let number1 = "";
 let number2 = "";
-let number3 = "";
 let operator = "";
 
-//function 'operate' that takes the above variables.
-//It takes the number and then calls one of above functions on the numbers.
-function operatorUsed(operatorButtonPressed)
-{   //first if statement doesn't allow an operator to be pressed without a number pressed first
-        if (number1 != "")
-            
-            //switch statement to take the operator button pressed
-            //on the calculator and change the operator variable accordingly
-            if (number2 == "")
-            {
-                switch(operatorButtonPressed){
-                    case "+":
-                        operator = "+";
-                        break;
-    
-                    case "-":
-                        operator = "-";
-                        break;
-    
-                    case "*":
-                        operator = "*";
-                        break;
-    
-                    case "/":
-                            operator = "/";
-                            break;
-                }
-                console.log("this is the first section")
-                operatorClicked = true;
-                document.getElementById("screenTextTop").textContent = number1 + " " + operator + " " + number2;
-            }
-
-            if (number2 != "")
-            {
-                switch(operatorButtonPressed){
-                    case "+":
-                        operator = "+";
-                        break;
-
-                    case "-":
-                        operator = "-";
-                        break;
-
-                    case "*":
-                        operator = "*";
-                        break;
-
-                    case "/":
-                        operator = "/";
-                        break;
-                }
-                
-
-                console.log("this is the second section")
-                number1 = number3;
-                number3 = "";
-                number2 = "";
-
-                document.getElementById("screenTextTop").textContent = number1 + " " + operator + " " + number2;
-                document.getElementById("screenTextBottom").textContent = "";
-            }
+function operatorUsed(operatorButtonPressed) {
+  if (number1 !== "") {
+    operator = operatorButtonPressed;
+    operatorClicked = true;
+    document.getElementById("screenTextTop").textContent =
+      number1 + " " + operator + " " + number2;
+  }
 }
 
+function operate() {
+  let result;
+  switch (operator) {
+    case "+":
+      result = add(number1, number2);
+      break;
+    case "-":
+      result = subtract(number1, number2);
+      break;
+    case "*":
+      result = multiply(number1, number2);
+      break;
+    case "/":
+      if (number2 === "0") {
+        document.getElementById("screenTextTop").textContent =
+          "Division by zero";
+        document.getElementById("screenTextBottom").textContent = "Game Over";
+        return;
+      }
+      result = divide(number1, number2);
+      break;
+    default:
+      return;
+  }
+  document.getElementById("screenTextTop").textContent = number1 + " " + operator + " " + number2;
+  document.getElementById("screenTextBottom").textContent = result;
+  number1 = result.toString();
+  number2 = "";
+  operator = "";
+}
+
+function add(a, b) {
+  return parseFloat(a) + parseFloat(b);
+}
+
+function subtract(a, b) {
+  return a - b;
+}
+
+function multiply(a, b) {
+  return a * b;
+}
+
+function divide(a, b) {
+  return a / b;
+}
 //function for buttons when clicked
 function button1Clicked(){
     if (operatorClicked == false && number1.length <= 8)
@@ -329,39 +319,22 @@ function buttonDivClicked(){
         }
 }
 
-function buttonNegativeClicked(){
-    let negative = "-";
-
-    if (operatorClicked == false)
-    {
-        if (number1.includes("-") != true)
-        {
-            number1 = negative += number1;
-            document.getElementById("screenTextBottom").textContent = number1;
-        }
-
-        else if (number1.includes("-") == true)
-        {
-            number1 = number1.substring(1);
-            document.getElementById("screenTextBottom").textContent = number1;
-        }
-
+function buttonNegativeClicked() {
+  if (operatorClicked === false) {
+    if (!number1.startsWith("-")) {
+      number1 = "-" + number1;
+    } else {
+      number1 = number1.substring(1);
     }
-
-    else if (operatorClicked == true)
-    {
-        if (number2.includes("-") != true)
-        {
-            number2 = negative += number2;
-            document.getElementById("screenTextBottom").textContent = number2;
-        }
-
-        else if (number2.includes("-") == true)
-        {
-            number2 = number2.substring(1);
-            document.getElementById("screenTextBottom").textContent = number2;
-        }
+    document.getElementById("screenTextBottom").textContent = number1;
+  } else {
+    if (!number2.startsWith("-")) {
+      number2 = "-" + number2;
+    } else {
+      number2 = number2.substring(1);
     }
+    document.getElementById("screenTextBottom").textContent = number2;
+  }
 }
 
 function buttonDelClicked()
